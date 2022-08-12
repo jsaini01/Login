@@ -10,6 +10,7 @@ const EnterLogin = () => {
 
   const [usererr, setUsererr] = useState(false);
   const [passerr, setPasserr] = useState(false);
+
   const navigate = useNavigate();
 
   const emailHandle = (ele) => {
@@ -59,34 +60,23 @@ const EnterLogin = () => {
 
       result = await result.json();
 
-      localStorage.setItem("user-info", JSON.stringify(result.token));
+      localStorage.setItem("user-info", JSON.stringify(result));
 
-      console.log(result.token);
-      navigate("/person");
+      if (result.token === undefined) {
+        navigate("/");
+        alert("not registered");
+      } else {
+        console.log(result.token);
+        navigate("/person");
+      }
     }
-
-    // navigate("/LoginPerson");
-    // console.log(result);
-    // history.push("add ");
-
-    // e.preventDefault();
-    // console.log({ email, password });
-    // const { data } = await axios.post(
-    //   "https://sql-dev-india.thewitslab.com:3003/auth/login",
-    //   {
-    //     email: email,
-    //     password: password,
-    //   }
-    // );
-    // const token = data.token;
-    // localStorage.setItem("Users", JSON.stringify(email, token));
-    // console.log(data);
   };
 
   return (
     <Form>
       <form onSubmit={AddValue}>
         <h1>Login</h1>
+
         <label htmlFor="email" />
 
         <input
@@ -94,7 +84,7 @@ const EnterLogin = () => {
           id="email"
           placeholder="Enter email"
           name="email"
-          value={email} 
+          value={email}
           onChange={emailHandle}
         />
         {usererr ? <p>Invalid Username</p> : null}
