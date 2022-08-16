@@ -118,7 +118,12 @@ const H2 = styled.p`
 `;
 
 const Profile = styled.div`
-  background-image: linear-gradient(to right, limegreen, yellow, limegreen);
+  background-image: linear-gradient(
+    to bottom right,
+    limegreen,
+    yellow,
+    limegreen
+  );
   width: 40%;
   display: flex;
   flex-direction: column;
@@ -129,6 +134,8 @@ const Profile = styled.div`
   text-transform: capitalize;
   color: black;
   padding: 0 0 2.5vw 0;
+  border: none;
+  box-shadow: 3px 3px 3px 2px grey;
 
   h3 {
     line-height: 3vw;

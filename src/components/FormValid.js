@@ -17,36 +17,47 @@ const FormValid = () => {
 
   const onSubmit = async () => {
     let items = { email, password };
-    let result = await fetch(
-      "https://sql-dev-india.thewitslab.com:3003/auth/login ",
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Accept: "application/json",
-        },
-        body: JSON.stringify(items),
+    try {
+      let result = await fetch(
+        "https://sql-dev-india.thewitslab.com:3003/auth/login ",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Accept: "application/json",
+          },
+          body: JSON.stringify(items),
+        }
+      );
+
+      let res = await result.json();
+
+      if (result.status === 200) {
+        localStorage.setItem("user-info", JSON.stringify(res));
+        console.log(result);
+        navigate("/person");
+      } else {
+        navigate("/");
+        alert("not registered");
       }
-    );
-
-    result = await result.json();
-
-    localStorage.setItem("user-info", JSON.stringify(result));
-
-    if (result.token === undefined) {
-      navigate("/");
-      alert("not registered");
-    } else {
-      console.log(result.token);
-      navigate("/person");
+    } catch (err) {
+      console(err);
     }
+
+    // if (result.token === undefined) {
+    //   navigate("/");
+    //   alert("not registered");
+    // } else {
+    //   console.log(result.token);
+    //   navigate("/person");
+    // }
   };
 
   return (
     <Form>
       <form onSubmit={handleSubmit(onSubmit)}>
         <input
-          {...register("mail", {
+          {...register("email", {
             required: true,
             pattern: /^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/,
           })}
@@ -56,7 +67,7 @@ const FormValid = () => {
             setEmail(e.target.value);
           }}
         />
-        {errors.mail && <p>Email is required.</p>}
+        {errors.email && <p>Email is required.</p>}
         <input
           {...register("password", {
             required: true,

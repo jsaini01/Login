@@ -3,15 +3,24 @@ import Login from "./components/Login";
 // import LoginPerson from "./components/LoginPerson";
 import { Routes, Route } from "react-router-dom";
 import LoginPerson from "./components/LoginPerson";
-// import PrivateRoute from "./components/PrivateRoute";
+import PrivateRoute from "./components/PrivateRoute";
 
 function App() {
   return (
     <div>
       <Routes>
-        <Route path="/" element={<Login />} exact />
-
-        <Route path="/person" element={<LoginPerson />} exact />
+        {/* <Route element={<PrivateRoute />}>
+          <Route path="/person" element={<LoginPerson />} exact />
+        </Route> */}
+        <Route
+          path="/person"
+          element={
+            <PrivateRoute>
+              <LoginPerson />
+            </PrivateRoute>
+          }
+        />
+        <Route path="/" element={<Login />} />
       </Routes>
     </div>
   );

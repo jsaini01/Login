@@ -46,7 +46,7 @@ const LoginPerson = () => {
           <Container>
             <h3>
               Name:
-              <span>{`  ${data.firstName} ${data.lastName}`}</span>
+              <span>{`  ${data.firstName} ${data.lastName} (${data.brokerageName})`}</span>
             </h3>
             <h3>
               Phone.no: <span>{data.phone}</span>
@@ -59,7 +59,7 @@ const LoginPerson = () => {
             </h3>
 
             <h3>
-              City:<span>{data.city}</span>{" "}
+              City:<span>{data.city}</span>
             </h3>
           </Container>
         </Profile>
