@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
+import { LoginWraper, Form } from "../styles/LoginStyle";
 
-import { Form } from "../styles/LoginStyle";
 import { useNavigate } from "react-router-dom";
 
 const FormValid = () => {
@@ -34,6 +34,7 @@ const FormValid = () => {
 
       if (result.status === 200) {
         localStorage.setItem("user-info", JSON.stringify(res));
+        localStorage.setItem("user", JSON.stringify(res.token));
         console.log(result);
         navigate("/person");
       } else {
@@ -41,50 +42,44 @@ const FormValid = () => {
         alert("not registered");
       }
     } catch (err) {
-      console(err);
+      console.log(err);
     }
-
-    // if (result.token === undefined) {
-    //   navigate("/");
-    //   alert("not registered");
-    // } else {
-    //   console.log(result.token);
-    //   navigate("/person");
-    // }
   };
 
   return (
-    <Form>
-      <form onSubmit={handleSubmit(onSubmit)}>
-        <input
-          {...register("email", {
-            required: true,
-            pattern: /^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/,
-          })}
-          placeholder="email"
-          value={email}
-          onChange={(e) => {
-            setEmail(e.target.value);
-          }}
-        />
-        {errors.email && <p>Email is required.</p>}
-        <input
-          {...register("password", {
-            required: true,
-            minLength: 6,
-            maxLength: 10,
-          })}
-          type="password"
-          placeholder="password"
-          value={password}
-          onChange={(e) => {
-            setPassword(e.target.value);
-          }}
-        />
-        {errors.password && <p>password is required.</p>}
-        <input type="submit" />
-      </form>
-    </Form>
+    <LoginWraper>
+      <Form>
+        <form onSubmit={handleSubmit(onSubmit)}>
+          <input
+            {...register("email", {
+              required: true,
+              pattern: /^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/,
+            })}
+            placeholder="email"
+            value={email}
+            onChange={(e) => {
+              setEmail(e.target.value);
+            }}
+          />
+          {errors.email && <p>Email is required.</p>}
+          <input
+            {...register("password", {
+              required: true,
+              minLength: 6,
+              maxLength: 10,
+            })}
+            type="password"
+            placeholder="password"
+            value={password}
+            onChange={(e) => {
+              setPassword(e.target.value);
+            }}
+          />
+          {errors.password && <p>password is required.</p>}
+          <input type="submit" />
+        </form>
+      </Form>
+    </LoginWraper>
   );
 };
 

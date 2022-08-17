@@ -2,14 +2,10 @@ import React from "react";
 
 import FormValid from "./FormValid";
 
-import { LoginWraper } from "../styles/LoginStyle";
+// import { LoginWraper } from "../styles/LoginStyle";
 
 const Login = () => {
-  return (
-    <LoginWraper>
-      <FormValid />
-    </LoginWraper>
-  );
+  return <FormValid />;
 };
 
 export default Login;

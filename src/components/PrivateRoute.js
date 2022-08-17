@@ -1,14 +1,10 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { Navigate } from "react-router-dom";
 
-const PrivateRoute = () => {
-  const [token, setToken] = useState("");
-  useEffect(() => {
-    const userInfo = JSON.parse(localStorage.getItem("user-info"));
-    console.log(userInfo.token);
-    setToken(userInfo.token);
-  }, []);
-  return token ? <Navigate to="/person" /> : <Navigate to="/" />;
-};
+function ProtectedRoute({ children }) {
+  const isToken = localStorage.getItem("user");
 
-export default PrivateRoute;
+  return isToken ? children : <Navigate to="/" />;
+}
+
+export default ProtectedRoute;

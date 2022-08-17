@@ -34,7 +34,7 @@ const LoginPerson = () => {
         </p>
 
         <button type="button" onClick={Logout}>
-          LogOut!
+          Logout !
         </button>
       </Div>
 
@@ -46,7 +46,7 @@ const LoginPerson = () => {
           <Container>
             <h3>
               Name:
-              <span>{`  ${data.firstName} ${data.lastName} (${data.brokerageName})`}</span>
+              <span>{`  ${data.firstName} ${data.lastName} `}</span>
             </h3>
             <h3>
               Phone.no: <span>{data.phone}</span>
